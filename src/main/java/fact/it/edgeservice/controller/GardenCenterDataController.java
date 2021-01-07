@@ -1,6 +1,7 @@
 package fact.it.edgeservice.controller;
 
 import fact.it.edgeservice.model.GardenCenter;
+import fact.it.edgeservice.model.Plant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -37,5 +38,16 @@ public class GardenCenterDataController {
                         });
 
         return responseEntityGardenCenters.getBody();
+    }
+
+    @GetMapping("/plants")
+    public List<Plant> getAllPlants(){
+
+        ResponseEntity<List<Plant>> responseEntityPlants =
+                restTemplate.exchange("http://" + plantServiceBaseUrl + "/plants",
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Plant>>() {
+                        });
+
+        return responseEntityPlants.getBody();
     }
 }

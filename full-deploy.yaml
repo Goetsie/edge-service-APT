@@ -1,0 +1,230 @@
+#deploy garden-service
+apiVersion: v1                    # API version
+kind: Service                     # Type of kubernetes resource
+metadata:
+  name: garden-center-service-mongo      # Name of the service
+  labels:                         # Labels that will be applied to the service
+    app: garden-center-service
+spec:
+  ports:
+    - port: 27017
+  selector:                       # Selects any Pod with labels `app=review-service,tier=mongo`
+    app: garden-center-service
+    tier: mongo
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment                    # Type of the kubernetes resource
+metadata:
+  name: garden-center-service-mongo-deployment           # Name of the deployment
+  labels:                           # Labels applied to this deployment
+    app: garden-center-service
+spec:
+  selector:
+    matchLabels:                    # This deployment applies to the Pods matching the specified labels
+      app: garden-center-service
+      tier: mongo
+  strategy:
+    type: Recreate
+  template:                         # Template for the Pods in this deployment
+    metadata:
+      labels:                       # Labels to be applied to the Pods in this deployment
+        app: garden-center-service
+        tier: mongo
+    spec:                           # The spec for the containers that will be run inside the Pods in this deployment
+      containers:
+        - image: mongo                # The container image
+          name: mongo
+          ports:
+            - containerPort: 27017        # The port that the container exposes
+              name: mongo
+---
+apiVersion: v1                   # API version
+kind: Service                    # Type of the kubernetes resource
+metadata:
+  name: garden-center-service-server    # Name of the service
+  labels:                        # Labels that will be applied to this service
+    app: garden-center-service-server
+spec:
+  type: NodePort                 # The service will be exposed by opening a Port on each node and proxying it. Allowing connections from outside the cluster
+  selector:
+    app: garden-center-service-server   # The service exposes Pods with label `app=review-service-server`
+  ports:                         # Forward incoming connections on port 8052 to the target port 8052
+    - name: http
+      port: 8052
+      targetPort: 8052
+---
+apiVersion: apps/v1           # API version
+kind: Deployment              # Type of kubernetes resource
+metadata:
+  name: garden-center-service-server-deployment    # Name of the kubernetes resource
+  labels:                     # Labels that will be applied to this resource
+    app: garden-center-service-server
+spec:
+  replicas: 1                 # No. of replicas/pods to run in this deployment
+  selector:
+    matchLabels:              # The deployment applies to any pods mayching the specified labels
+      app: garden-center-service-server
+  template:                   # Template for creating the pods in this deployment
+    metadata:
+      labels:                 # Labels that will be applied to each Pod in this deployment
+        app: garden-center-service-server
+    spec:                     # Spec for the containers that will be run in the Pods
+      containers:
+        - name: garden-center-service
+          image: goetsie/garden_center-service
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8052 # The port that the container exposes
+          resources:
+            limits:
+              cpu: 0.2
+              memory: "200Mi"
+          env:                    # Environment variables supplied to the Pod
+            - name: MONGODB_HOST
+              value: "garden-center-service-mongo"
+            - name: MONGODB_PORT
+              value: "27017"
+---
+
+#deploy plant-service
+apiVersion: v1                    # API version
+kind: Service                     # Type of kubernetes resource
+metadata:
+  name: plant-service-mongo      # Name of the service
+  labels:                         # Labels that will be applied to the service
+    app: plant-service
+spec:
+  ports:
+    - port: 27017
+  selector:                       # Selects any Pod with labels `app=review-service,tier=mongo`
+    app: plant-service
+    tier: mongo
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment                    # Type of the kubernetes resource
+metadata:
+  name: plant-service-mongo-deployment           # Name of the deployment
+  labels:                           # Labels applied to this deployment
+    app: plant-service
+spec:
+  selector:
+    matchLabels:                    # This deployment applies to the Pods matching the specified labels
+      app: plant-service
+      tier: mongo
+  strategy:
+    type: Recreate
+  template:                         # Template for the Pods in this deployment
+    metadata:
+      labels:                       # Labels to be applied to the Pods in this deployment
+        app: plant-service
+        tier: mongo
+    spec:                           # The spec for the containers that will be run inside the Pods in this deployment
+      containers:
+        - image: mongo                # The container image
+          name: mongo
+          ports:
+            - containerPort: 27017        # The port that the container exposes
+              name: mongo
+---
+apiVersion: v1                   # API version
+kind: Service                    # Type of the kubernetes resource
+metadata:
+  name: plant-service-server    # Name of the service
+  labels:                        # Labels that will be applied to this service
+    app: plant-service-server
+spec:
+  type: NodePort                 # The service will be exposed by opening a Port on each node and proxying it. Allowing connections from outside the cluster
+  selector:
+    app: plant-service-server   # The service exposes Pods with label `app=review-service-server`
+  ports:                         # Forward incoming connections on port 8052 to the target port 8052
+    - name: http
+      port: 8053
+      targetPort: 8053
+---
+apiVersion: apps/v1           # API version
+kind: Deployment              # Type of kubernetes resource
+metadata:
+  name: plant-service-server-deployment    # Name of the kubernetes resource
+  labels:                     # Labels that will be applied to this resource
+    app: plant-service-server
+spec:
+  replicas: 1                 # No. of replicas/pods to run in this deployment
+  selector:
+    matchLabels:              # The deployment applies to any pods mayching the specified labels
+      app: plant-service-server
+  template:                   # Template for creating the pods in this deployment
+    metadata:
+      labels:                 # Labels that will be applied to each Pod in this deployment
+        app: plant-service-server
+    spec:                     # Spec for the containers that will be run in the Pods
+      containers:
+        - name: plant-service
+          image: goetsie/plant-service
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8053 # The port that the container exposes
+          resources:
+            limits:
+              cpu: 0.2
+              memory: "200Mi"
+          env:                    # Environment variables supplied to the Pod
+            - name: MONGODB_HOST
+              value: "plant-service-mongo"
+            - name: MONGODB_PORT
+              value: "27017"
+---
+
+#deploy edge-service
+apiVersion: apps/v1                          # API version
+kind: Deployment                             # Type of kubernetes resource
+metadata:
+  name: edge-service-server-deployment # Name of the deployment
+  labels:                                    # Labels that will be applied to this deployment
+    app: edge-service-server
+spec:
+  replicas: 1                 # No. of replicas/pods to run in this deployment
+  selector:
+    matchLabels:              # The deployment applies to any pods mayching the specified labels
+      app: edge-service-server
+  template:                   # Template for creating the pods in this deployment
+    metadata:
+      labels:                 # Labels that will be applied to each Pod in this deployment
+        app: edge-service-server
+    spec:                     # Spec for the containers that will be run in the Pods
+      containers:
+        - name: edge-service-server
+          image: goetsie/edge-service
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8050 # The port that the container exposes
+          resources:
+            limits:
+              cpu: 0.2
+              memory: "200Mi"
+          env:                    # Environment variables supplied to the Pod
+#            - name: EMPLOYEE_SERVICE_BASEURL
+#              value: "employee-service-server:8051"
+            - name: GARDEN_CENTER_SERVICE_BASEURL
+              value: "garden-center-service-server:8052"
+            - name: PLANT_SERVICE_BASEURL
+              value: "plant-service-server:8053"
+---
+apiVersion: v1                # API version
+kind: Service                 # Type of the kubernetes resource
+metadata:
+  name: edge-service-server    # Name of the service
+  labels:                            # Labels that will be applied to this service
+    app: edge-service-server
+spec:
+  type: NodePort                     # The service will be exposed by opening a Port on each node and proxying it. Allowing connections from outside the cluster
+  selector:
+    app: edge-service-server   # The service exposes Pods with label `app=brank-edge-service-server`
+  ports:                             # Forward incoming connections on port 8080 to the target port 8050
+    - name: http
+      port: 8050
+      targetPort: 8050
