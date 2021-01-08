@@ -1,5 +1,7 @@
 package fact.it.edgeservice.controller;
 
+import fact.it.edgeservice.model.Employee;
+import fact.it.edgeservice.model.EmployeesOfGardenCenter;
 import fact.it.edgeservice.model.GardenCenter;
 import fact.it.edgeservice.model.Plant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,7 @@ public class GardenCenterDataController {
     private String employeeServiceBaseUrl;
 
     @GetMapping("/gardencenters")
-    public List<GardenCenter> getAllGardenCenters(){
+    public List<GardenCenter> getAllGardenCenters() {
 
         ResponseEntity<List<GardenCenter>> responseEntityGardenCenters =
                 restTemplate.exchange("http://" + gardenCenterServiceBaseUrl + "/gardencenters",
@@ -41,7 +43,7 @@ public class GardenCenterDataController {
     }
 
     @GetMapping("/plants")
-    public List<Plant> getAllPlants(){
+    public List<Plant> getAllPlants() {
 
         ResponseEntity<List<Plant>> responseEntityPlants =
                 restTemplate.exchange("http://" + plantServiceBaseUrl + "/plants",
@@ -50,4 +52,19 @@ public class GardenCenterDataController {
 
         return responseEntityPlants.getBody();
     }
+
+    @GetMapping("/gardencenters/{gardenCenterName}/employees")
+    public EmployeesOfGardenCenter getEmployeesOfGardenCenterByName(@PathVariable String gardenCenterName) {
+
+        GardenCenter gardenCenter = restTemplate.getForObject("http://" + gardenCenterServiceBaseUrl + "/gardencenters/{gardenCenterName}",
+                GardenCenter.class, gardenCenterName);
+
+        ResponseEntity<List<Employee>> responseEntityEmployees =
+                restTemplate.exchange("http://" + employeeServiceBaseUrl + "/employees/gardenCenterId/{gardenCenterId}",
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Employee>>() {
+                        }, gardenCenter.getGardenCenterId());
+
+        return new EmployeesOfGardenCenter(gardenCenter, responseEntityEmployees.getBody());
+    }
 }
+

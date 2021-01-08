@@ -1,28 +1,22 @@
 package fact.it.edgeservice.model;
 
-public class GardenCenter {
-    private String id;
+import java.util.ArrayList;
+import java.util.List;
+
+public class EmployeesOfGardenCenter {
     private int gardenCenterId;
     private String name;
     private String city;
     private String address;
+    private List<Employee> employees;
 
-    public GardenCenter() {
-    }
-
-    public GardenCenter(int gardenCenterId, String name, String city, String address) {
-        this.gardenCenterId = gardenCenterId;
-        this.name = name;
-        this.city = city;
-        this.address = address;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public EmployeesOfGardenCenter(GardenCenter gardenCenter, List<Employee> employees) {
+        setGardenCenterId(gardenCenter.getGardenCenterId());
+        setName(gardenCenter.getName());
+        setCity(gardenCenter.getCity());
+        setAddress(gardenCenter.getAddress());
+        employees = new ArrayList<>();
+        setEmployees(employees);
     }
 
     public int getGardenCenterId() {
@@ -55,5 +49,13 @@ public class GardenCenter {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }
