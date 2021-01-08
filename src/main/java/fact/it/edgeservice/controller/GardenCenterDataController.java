@@ -53,18 +53,27 @@ public class GardenCenterDataController {
         return responseEntityPlants.getBody();
     }
 
-    @GetMapping("/gardencenters/{gardenCenterName}/employees")
-    public EmployeesOfGardenCenter getEmployeesOfGardenCenterByName(@PathVariable String gardenCenterName) {
+    @GetMapping("/gardencenters/{gardencenterid}/employees")
+    public List<Employee> getEmployeesOfGardenCenterByName(@PathVariable int gardencenterid) {
 
-        GardenCenter gardenCenter = restTemplate.getForObject("http://" + gardenCenterServiceBaseUrl + "/gardencenters/{gardenCenterName}",
-                GardenCenter.class, gardenCenterName);
+        GardenCenter gardenCenter = restTemplate.getForObject("http://" + gardenCenterServiceBaseUrl + "/gardencenters/{gardencenterid}",
+                GardenCenter.class, gardencenterid);
 
         ResponseEntity<List<Employee>> responseEntityEmployees =
                 restTemplate.exchange("http://" + employeeServiceBaseUrl + "/employees/gardenCenterId/{gardenCenterId}",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Employee>>() {
-                        }, gardenCenter.getGardenCenterId());
+                        }, gardencenterid);
 
-        return new EmployeesOfGardenCenter(gardenCenter, responseEntityEmployees.getBody());
+        return responseEntityEmployees.getBody();
+    }
+
+    @GetMapping("/employees/name/{name}")
+    public Employee getAllEmployees(@PathVariable String name) {
+
+        Employee gardenCenter = restTemplate.getForObject("http://" + gardenCenterServiceBaseUrl + "/employees/name/{name}",
+                Employee.class, name);
+
+        return gardenCenter;
     }
 }
 

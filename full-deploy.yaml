@@ -303,8 +303,8 @@ spec:
               cpu: 0.2
               memory: "200Mi"
           env:                    # Environment variables supplied to the Pod
-#            - name: EMPLOYEE_SERVICE_BASEURL
-#              value: "employee-service-server:8051"
+            - name: EMPLOYEE_SERVICE_BASEURL
+              value: "employee-service-server:8051"
             - name: GARDEN_CENTER_SERVICE_BASEURL
               value: "garden-center-service-server:8052"
             - name: PLANT_SERVICE_BASEURL
