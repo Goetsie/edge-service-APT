@@ -127,9 +127,11 @@ public class GardenCenterDataController {
     @GetMapping("/gardencenters/{gardencenterid}/plants")
     public PlantsOfGardenCenter getPlantsOfGardenCenterByGardenCenterId(@PathVariable int gardencenterid) {
 
+        // GET gardenCenter
         GardenCenter gardenCenter = restTemplate.getForObject("http://" + gardenCenterServiceBaseUrl + "/gardencenters/{gardencenterid}",
                 GardenCenter.class, gardencenterid);
 
+        // GET all the plants of the garden center
         ResponseEntity<List<Plant>> responseEntityPlants =
                 restTemplate.exchange("http://" + plantServiceBaseUrl + "/plants/gardencenterid/{gardenCenterId}",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Plant>>() {
