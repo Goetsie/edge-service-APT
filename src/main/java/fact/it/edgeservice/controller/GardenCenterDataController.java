@@ -1,9 +1,6 @@
 package fact.it.edgeservice.controller;
 
-import fact.it.edgeservice.model.Employee;
-import fact.it.edgeservice.model.EmployeesOfGardenCenter;
-import fact.it.edgeservice.model.GardenCenter;
-import fact.it.edgeservice.model.Plant;
+import fact.it.edgeservice.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -74,6 +71,20 @@ public class GardenCenterDataController {
                 Employee.class, name);
 
         return gardenCenter;
+    }
+
+    @GetMapping("/gardencenters/{gardencenterid}/plants")
+    public PlantsOfGardenCenter getPlantsOfGardenCenterByGardenCenterId(@PathVariable int gardencenterid) {
+
+        GardenCenter gardenCenter = restTemplate.getForObject("http://" + gardenCenterServiceBaseUrl + "/gardencenters/{gardencenterid}",
+                GardenCenter.class, gardencenterid);
+
+        ResponseEntity<List<Plant>> responseEntityPlants =
+                restTemplate.exchange("http://" + employeeServiceBaseUrl + "/plants/gardencenterid/{gardenCenterId}",
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Plant>>() {
+                        }, gardencenterid);
+
+        return new PlantsOfGardenCenter(gardenCenter, responseEntityPlants.getBody());
     }
 }
 
