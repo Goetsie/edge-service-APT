@@ -46,7 +46,7 @@ metadata:
   labels:                        # Labels that will be applied to this service
     app: garden-center-service-server
 spec:
-  type: ClusterIP                 # The service will be exposed by opening a Port on each node and proxying it. Allowing connections from outside the cluster
+  type: NodePort                 # The service will be exposed by opening a Port on each node and proxying it. Allowing connections from outside the cluster
   selector:
     app: garden-center-service-server   # The service exposes Pods with label `app=review-service-server`
   ports:                         # Forward incoming connections on port 8052 to the target port 8052
@@ -136,7 +136,7 @@ metadata:
   labels:                        # Labels that will be applied to this service
     app: plant-service-server
 spec:
-  type: ClusterIP                 # The service will be exposed by opening a Port on each node and proxying it. Allowing connections from outside the cluster
+  type: NodePort                 # The service will be exposed by opening a Port on each node and proxying it. Allowing connections from outside the cluster
   selector:
     app: plant-service-server   # The service exposes Pods with label `app=review-service-server`
   ports:                         # Forward incoming connections on port 8052 to the target port 8052
@@ -266,7 +266,7 @@ metadata:
   labels:                           # Labels that will be applied to this service
     app: employee-service-server
 spec:
-  type: ClusterIP                    # The service will be exposed by opening a Port on each node and proxying it. Allowing connections from outside the cluster
+  type: NodePort                    # The service will be exposed by opening a Port on each node and proxying it. Allowing connections from outside the cluster
   selector:
     app: employee-service-server   # The service exposes Pods with label `app=employee-service-server`
   ports:                            # Forward incoming connections on port 8080 to the target port 8051
