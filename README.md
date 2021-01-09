@@ -49,5 +49,8 @@ Alle calls:
 ![](screenshots/swagger/getPlantByPlantId.JPG)
 
 ###Code coverage edge service:
+
+[![Coverage Status](https://coveralls.io/repos/github/badges/shields/badge.svg?branch=master)](https://coveralls.io/github/badges/shields?branch=main)
+
 ![](screenshots/swagger/GardenCenterDataControllerUnitTests.png)
 
