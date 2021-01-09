@@ -25,10 +25,6 @@ public class Plant {
         return plantNumber;
     }
 
-    public void setPlantNumber(String plantNumber) {
-        this.plantNumber = plantNumber;
-    }
-
     public String getName() {
         return name;
     }
