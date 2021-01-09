@@ -131,7 +131,7 @@ public class GardenCenterDataController {
                 GardenCenter.class, gardencenterid);
 
         ResponseEntity<List<Plant>> responseEntityPlants =
-                restTemplate.exchange("http://" + employeeServiceBaseUrl + "/plants/gardencenterid/{gardenCenterId}",
+                restTemplate.exchange("http://" + plantServiceBaseUrl + "/plants/gardencenterid/{gardenCenterId}",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Plant>>() {
                         }, gardencenterid);
 
