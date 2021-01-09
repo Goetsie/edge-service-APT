@@ -11,10 +11,10 @@ public class Plant {
     }
 
     public Plant(int gardenCenterId, String plantNumber, String name, String description) {
-        this.gardenCenterId = gardenCenterId;
-        this.plantNumber = plantNumber;
-        this.name = name;
-        this.description = description;
+        setGardenCenterId(gardenCenterId);
+        setPlantNumber(plantNumber);
+        setName(name);
+        setDescription(description);
     }
 
     public String getPlantNumber() {
