@@ -81,19 +81,19 @@ public class GardenCenterDataController {
     }
 
     @PostMapping("/plants")
-    public Plant addPlant(@RequestParam Integer gardenCenterId, @RequestParam String plantNumber, @RequestParam String name, @RequestParam String description){
+    public Plant addPlant(@RequestParam Integer gardenCenterId, @RequestParam String plantNumber, @RequestParam String name, @RequestParam String description) {
 
         Plant plant =
                 restTemplate.postForObject("http://" + plantServiceBaseUrl + "/plants",
-                        new Plant(gardenCenterId,plantNumber,name, description),Plant.class);
+                        new Plant(gardenCenterId, plantNumber, name, description), Plant.class);
 
         return plant;
     }
 
     @PutMapping("/plants")
-    public Plant updatePlant(@RequestParam Integer gardenCenterId, @RequestParam String plantNumber, @RequestParam String name, @RequestParam String description){
+    public Plant updatePlant(@RequestParam Integer gardenCenterId, @RequestParam String plantNumber, @RequestParam String name, @RequestParam String description) {
 
-        Plant plant = new Plant(gardenCenterId,plantNumber,name, description);
+        Plant plant = new Plant(gardenCenterId, plantNumber, name, description);
 
         ResponseEntity<Plant> responseEntityBook =
                 restTemplate.exchange("http://" + plantServiceBaseUrl + "/plants",
@@ -103,7 +103,7 @@ public class GardenCenterDataController {
     }
 
     @DeleteMapping("/plants/{plantNumber}")
-    public ResponseEntity deletePlant(@PathVariable String plantNumber){
+    public ResponseEntity deletePlant(@PathVariable String plantNumber) {
 
         restTemplate.delete("http://" + plantServiceBaseUrl + "/plants/" + plantNumber);
 
@@ -122,16 +122,6 @@ public class GardenCenterDataController {
                         }, gardencenterid);
 
         return new EmployeesOfGardenCenter(gardenCenter, responseEntityEmployees.getBody());
-    }
-
-    @PostMapping("/plants")
-    public Plant addPlant(@RequestParam Integer gardenCenterId, @RequestParam String plantNumber, @RequestParam String name, @RequestParam String description){
-
-        Plant addPlant =
-                restTemplate.postForObject("http://" + plantServiceBaseUrl + "/plants",
-                        new Plant(gardenCenterId,plantNumber,name, description),Plant.class);
-
-        return addPlant;
     }
 
     @GetMapping("/gardencenters/{gardencenterid}/plants")
