@@ -17,6 +17,10 @@ public class Plant {
         setDescription(description);
     }
 
+    public void setPlantNumber(String plantNumber) {
+        this.plantNumber = plantNumber;
+    }
+
     public String getPlantNumber() {
         return plantNumber;
     }
