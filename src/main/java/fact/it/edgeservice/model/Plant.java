@@ -2,7 +2,6 @@ package fact.it.edgeservice.model;
 
 
 public class Plant {
-    private String id;
     private String plantNumber;
     private String name;
     private String description;
@@ -12,18 +11,14 @@ public class Plant {
     }
 
     public Plant(int gardenCenterId, String plantNumber, String name, String description) {
-        this.gardenCenterId = gardenCenterId;
+        setGardenCenterId(gardenCenterId);
+        setPlantNumber(plantNumber);
+        setName(name);
+        setDescription(description);
+    }
+
+    public void setPlantNumber(String plantNumber) {
         this.plantNumber = plantNumber;
-        this.name = name;
-        this.description = description;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getPlantNumber() {

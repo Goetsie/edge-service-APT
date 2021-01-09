@@ -1,19 +1,20 @@
 package fact.it.edgeservice.model;
 
-public class GardenCenter {
+import java.util.List;
+
+public class PlantsOfGardenCenter {
     private int gardenCenterId;
     private String name;
     private String city;
     private String address;
+    private List<Plant> plants;
 
-    public GardenCenter() {
-    }
-
-    public GardenCenter(int gardenCenterId, String name, String city, String address) {
-        this.gardenCenterId = gardenCenterId;
-        this.name = name;
-        this.city = city;
-        this.address = address;
+    public PlantsOfGardenCenter(GardenCenter gardenCenter, List<Plant> plants) {
+        setGardenCenterId(gardenCenter.getGardenCenterId());
+        setName(gardenCenter.getName());
+        setCity(gardenCenter.getCity());
+        setAddress(gardenCenter.getAddress());
+        setPlants(plants);
     }
 
     public int getGardenCenterId() {
@@ -46,5 +47,13 @@ public class GardenCenter {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public List<Plant> getPlants() {
+        return plants;
+    }
+
+    public void setPlants(List<Plant> plants) {
+        this.plants = plants;
     }
 }

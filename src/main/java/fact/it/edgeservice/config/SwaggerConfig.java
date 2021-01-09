@@ -27,7 +27,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
                 .title("Edge service garden centers")
-                .description("This page list all the rest apis for the edge service garden centers.")
+                .description("This page list all the rest api calls for the edge service garden centers.")
                 .version("1.0-SNAPSHOT")
                 .build();
     }
