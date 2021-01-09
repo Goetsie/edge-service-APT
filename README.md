@@ -16,3 +16,34 @@ Deployment Diagram Microservices met Kubernetes: enkel Edge-service exposed
 
 Deployment Diagram Microservices met Kubernetes testing: alle microservices exposed
 ![](screenshots/DeploymentDiagramEdgeTesting.JPG)
+-----------------------------------------------------------------------------------
+
+Bewijs output en werking swagger:
+Alle calls:
+![](screenshots/swagger/main.JPG)
+1. /gardencenters (get)
+![](screenshots/swagger/getGardencenters.JPG)
+2. /gardencenters/{gardencenterid}/employees (get)
+![](screenshots/swagger/getEmployeesByGardencenterId.JPG)
+3. /gardencenters/{gardencenterid}/plants (get)
+![](screenshots/swagger/getPlantsByGardencenterId.JPG)
+4. /plants (get)
+![](screenshots/swagger/getPlants.JPG)
+5. /plants (post)
+![](screenshots/swagger/postPlantParameters.JPG)
+![](screenshots/swagger/postPlant.JPG)
+6. /plants (put)
+![](screenshots/swagger/putPlantParameters.JPG)
+![](screenshots/swagger/putPlant.JPG)
+7. /plants/description/{description} (get)
+![](screenshots/swagger/getPlantByDescriptionParameters.JPG)
+![](screenshots/swagger/getPlantByDescription.JPG)
+8. /plants/name/{name} (get)
+![](screenshots/swagger/getPlantByNameParameters.JPG)
+![](screenshots/swagger/getPlantByName.JPG)
+9. /plants/{plantNumber} (delete)
+![](screenshots/swagger/deletePlantParameters.JPG)
+![](screenshots/swagger/deletePlant.JPG)
+10. /plants/{plantNumber} (get)
+![](screenshots/swagger/getPlantPlantIdParameters.JPG)
+![](screenshots/swagger/getPlantByPlantId.JPG)
