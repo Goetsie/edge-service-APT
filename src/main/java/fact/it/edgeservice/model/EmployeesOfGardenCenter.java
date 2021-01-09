@@ -15,7 +15,6 @@ public class EmployeesOfGardenCenter {
         setName(gardenCenter.getName());
         setCity(gardenCenter.getCity());
         setAddress(gardenCenter.getAddress());
-        employees = new ArrayList<>();
         setEmployees(employees);
     }
 

@@ -1,7 +1,6 @@
 package fact.it.edgeservice.model;
 
 public class GardenCenter {
-    private String id;
     private int gardenCenterId;
     private String name;
     private String city;
@@ -15,14 +14,6 @@ public class GardenCenter {
         this.name = name;
         this.city = city;
         this.address = address;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public int getGardenCenterId() {

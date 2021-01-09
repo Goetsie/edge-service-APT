@@ -7,7 +7,6 @@ public class Plant {
     private String description;
     private int gardenCenterId;
 
-
     public Plant() {
     }
 

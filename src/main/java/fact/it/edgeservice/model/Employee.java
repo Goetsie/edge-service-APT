@@ -1,8 +1,6 @@
 package fact.it.edgeservice.model;
 
 public class Employee {
-    private int id;
-
     private int gardenCenterId;
 
     private String surName;
