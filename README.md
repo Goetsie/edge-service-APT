@@ -15,4 +15,4 @@ Deployment Diagram Microservices met Kubernetes: enkel Edge-service exposed
 ![](screenshots/DeploymentDiagramEdge.JPG)
 
 Deployment Diagram Microservices met Kubernetes testing: alle microservices exposed
-![](images/DeploymentDiagramEdgeTesting.JPG)
+![](screenshots/DeploymentDiagramEdgeTesting.JPG)
