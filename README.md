@@ -1,6 +1,6 @@
 # Edge-service
 
-Inleiding:\ 
+Inleiding:</br> 
 Het thema dat ons is toegewezen is "tuincetrums, werknemers en planten", we hebben dus hiervoor 3 Back-End microservices geschreven met een Edge-service die deze aanspreekt, we hebben gebruik gemaakt van Kubernetes Deployemt, screenshots van het diagram staan ook hier weergegeven.
 
 GitHub Repositories Back-End services:
