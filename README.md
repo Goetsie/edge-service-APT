@@ -1,9 +1,9 @@
 # Edge-service
 
-Inleiding:</br> 
-Het thema dat ons is toegewezen is "tuincetrums, werknemers en planten", we hebben dus hiervoor 3 Back-End microservices geschreven met een Edge-service die deze aanspreekt, we hebben gebruik gemaakt van Kubernetes Deployemt, screenshots van het diagram staan ook hier weergegeven.
+**Inleiding:**</br> 
+Het thema dat ons is toegewezen is "tuincentra, werknemers en planten", we hebben hiervoor dus 3 Back-End microservices geschreven met één Edge-service die deze aanspreekt. Bijkomend hebben we gebruik gemaakt van Kubernetes Deployemt. De screenshots van het diagram staan ook hier weergegeven.
 
-GitHub Repositories Back-End services:
+###GitHub Repositories Back-End services:
 1. Employee service:
 https://github.com/Goetsie/employee-service-APT
 2. Garden Center service:
@@ -11,14 +11,14 @@ https://github.com/Goetsie/garden_center-service-APT
 3. Plant service:
 https://github.com/Goetsie/plant-service-APT
 
-Deployment Diagram Microservices met Kubernetes: enkel Edge-service exposed
+#####Deployment Diagram Microservices met Kubernetes: enkel Edge-service exposed
 ![](screenshots/DeploymentDiagramEdge.JPG)
 
-Deployment Diagram Microservices met Kubernetes testing: alle microservices exposed
+#####Deployment Diagram Microservices met Kubernetes testing: alle microservices exposed
 ![](screenshots/DeploymentDiagramEdgeTesting.JPG)
 -----------------------------------------------------------------------------------
 
-Bewijs output en werking swagger:
+####Bewijs output en werking swagger:
 Alle calls:
 ![](screenshots/swagger/main.JPG)
 1. /gardencenters (get)
@@ -70,3 +70,10 @@ Bewijs output en werking postman:
 ![](screenshots/postman/updatePlant.JPG)
 10. /plants/{plantNumber} (delete)
 ![](screenshots/postman/deletePlant.JPG)
+
+###Code coverage edge service:
+
+[![Coverage Status](https://coveralls.io/repos/github/badges/shields/badge.svg?branch=master)](https://coveralls.io/github/badges/shields?branch=main)
+
+![](screenshots/GardenCenterDataControllerUnitTests.png)
+
